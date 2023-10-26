@@ -1,0 +1,35 @@
+const express=require('express')
+const bodyParser=require('body-parser')
+const Cors=require('cors')
+const mongoose=require('mongoose')
+const userModel = require('./userModel')
+
+const app=express()
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(Cors())
+
+mongoose.connect("mongodb+srv://sreelekshmisl1710:Dharithri@cluster0.y83cozw.mongodb.net/userDB?retryWrites=true&w=majority",{useNewUrlParser:true})
+
+app.post("/regu",async(request,response)=>{
+    let data=request.body
+    const user=new userModel(data)
+    let result=await user.save()
+    if (result.name!="") {
+        response.json({"status":"success"})
+    } else {
+        response.json({"status":"error"})
+    }
+})
+
+
+
+
+
+
+
+
+
+app.listen(3001,()=>{
+    console.log("Server is running")
+})
