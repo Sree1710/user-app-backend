@@ -22,7 +22,26 @@ app.post("/regu",async(request,response)=>{
     }
 })
 
+app.post("/login",async(request,response)=>{
+    let data=request.body
+    let getUsername=data.username
+    let getPassword=data.password
+    let result=await userModel.find({username:getUsername})
+    console.log(result)
+    if (result.length>0) {
+        console.log(getPassword)
+        console.log(result[0].password)
+        if (result[0].password==getPassword) {
+            response.json({"status":"success","data":result[0]})
+        } else {
+            response.json({"status":"incorrect password"})
+        }
+    } else {
+        
+        response.json({"status":"Invalid Username"})
+    }
 
+})
 
 
 
