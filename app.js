@@ -55,6 +55,11 @@ app.post("/addp",async(request,response)=>{
     }
 })
 
+app.get("/viewp",async(request,response)=>{
+    let result=await postModel.find()
+    response.json(result)
+})
+
 
 
 
