@@ -66,7 +66,15 @@ app.post("/searchp",async(request,response)=>{
     response.json(result)
 })
 
-
+app.post("/deletep",async(request,response)=>{
+    let data=request.body
+    let result=await postModel.deleteOne(data)
+    if (result.acknowledged==true) {
+        response.json({"status":"success"})
+    } else {
+        response.json({"status":"error"})
+    }
+})
 
 
 
