@@ -60,6 +60,12 @@ app.get("/viewp",async(request,response)=>{
     response.json(result)
 })
 
+app.post("/searchp",async(request,response)=>{
+    let data=request.body
+    let result=await postModel.find(data)
+    response.json(result)
+})
+
 
 
 
