@@ -55,8 +55,10 @@ app.post("/addp",async(request,response)=>{
     }
 })
 
-app.get("/viewp",async(request,response)=>{
-    let result=await postModel.find()
+app.post("/viewp",async(request,response)=>{
+    let data=request.body
+    console.log(data)
+    let result=await postModel.find(data)
     response.json(result)
 })
 
@@ -68,7 +70,8 @@ app.post("/searchp",async(request,response)=>{
 
 app.post("/deletep",async(request,response)=>{
     let data=request.body
-    let result=await postModel.deleteOne(data)
+    console.log(data)
+    let result=await postModel.find(data).deleteOne().exec()
     if (result.acknowledged==true) {
         response.json({"status":"success"})
     } else {
